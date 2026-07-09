@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0a0a0a;
+  --bone: #f4f1ea;
+  --magenta: #ff3ea5;
+  --violet: #9b5cff;
+  --cyan: #5cf2ff;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  background: #0a0a0a;
+  color: #f4f1ea;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  overscroll-behavior: none;
+}
+
+::selection {
+  background: #ff3ea5;
+  color: #0a0a0a;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f1f1f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff3ea5;
+}
+
+/* 工具类 */
+.text-stroke {
+  -webkit-text-stroke: 1px #f4f1ea;
+  color: transparent;
+}
+.text-stroke-magenta {
+  -webkit-text-stroke: 1px #ff3ea5;
+  color: transparent;
+}
+
+.grain-overlay::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>");
+  opacity: 0.18;
+  mix-blend-mode: overlay;
+  animation: grain 8s steps(8) infinite;
+  z-index: 1;
+}
+
+.scanline-overlay::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 62, 165, 0.35) 50%,
+    transparent 100%
+  );
+  animation: scanline 7s linear infinite;
+  pointer-events: none;
+  z-index: 60;
+}
+
+.glow-magenta {
+  text-shadow: 0 0 24px rgba(255, 62, 165, 0.45),
+    0 0 64px rgba(255, 62, 165, 0.25);
+}
+
+.glow-cyan {
+  text-shadow: 0 0 24px rgba(92, 242, 255, 0.45),
+    0 0 64px rgba(92, 242, 255, 0.25);
+}
+
+.hover-tilt {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.hover-tilt:hover {
+  transform: perspective(900px) rotateX(2deg) rotateY(-4deg) scale(1.01);
+}
+
+.divider-dotted {
+  background-image: radial-gradient(circle, #f4f1ea 1px, transparent 1px);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+/* 入场动画工具 */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal-up.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-blur {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(20px);
+  transition: opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease;
+}
+.reveal-blur.is-in {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.reveal-clip {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.reveal-clip.is-in {
+  clip-path: inset(0 0 0 0);
+}
