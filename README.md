@@ -114,7 +114,8 @@ This repo is wired with a one-flow deployment:
 
 1. Repo → **Settings → Pages**
 2. **Source**: select **GitHub Actions** (not "Deploy from a branch").
-3. Push to `main`. The first run takes ~1–2 minutes; subsequent runs are cached.
+3. **Settings → Actions → General → Workflow permissions**: ensure "Read and write permissions" is enabled, and tick **"Allow GitHub Actions to create and approve pull requests"** if needed. The workflow declares `contents: write`, `pages: write`, and `id-token: write` permissions explicitly.
+4. Push to `main`. The first run takes ~1–2 minutes; subsequent runs are cached by `actions/setup-node`.
 
 > ⚠️ If the repo is the **organization page** (`Nexus-Aethra.github.io` itself), the website URL is the root domain `https://Nexus-Aethra.github.io/`. Our `vite.config.ts` uses `base: "./"` so it works either as a root page or as a project page (`https://Nexus-Aethra.github.io/<repo>/`).
 
@@ -123,6 +124,8 @@ This repo is wired with a one-flow deployment:
 - **`HashRouter`** — no need for server-side rewrites; deep links like `/#/manifesto` work after hard refresh.
 - **`.nojekyll`** — GitHub Pages won't try to run our `dist/` through Jekyll.
 - **`base: "./"`** — assets resolve relatively, so we don't need to hardcode the org name in paths.
+- **`permissions: id-token: write`** — `actions/deploy-pages@v4` requires OIDC to authenticate against the `github-pages` environment. Without it you get `Unable to get ACTIONS_ID_TOKEN_REQUEST_URL env variable`.
+- **`node-version: 22`** — GitHub deprecated Node 20 on Actions runners in late 2025; using 22 (LTS) avoids the deprecation banner and keeps your build off the slow path.
 
 ---
 

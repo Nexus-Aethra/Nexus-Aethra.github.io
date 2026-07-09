@@ -5,9 +5,15 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# 允许 actions 推送到 gh-pages 分支
+# 同时给 build 与 deploy 所需权限：
+#  - contents: write          签出/可选推送
+#  - pages: write             写入 GitHub Pages（部分新版 actions 需要）
+#  - id-token: write          关键：让 actions/deploy-pages@v4 拿到 OIDC token，
+#                              才能向 github-pages 环境发布
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 # 同名仓库（同 org 下的 user/org page）只需要一份部署；
 # 这里开 concurrency 保证不会出现两次部署同时跑，导致 gh-pages 内容错乱。
@@ -25,7 +31,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # GitHub 自 2025 起逐步弃用 Node 20 runner；用 LTS Node 22
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -34,7 +41,6 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # 让 vite 构建稳定可缓存
           NODE_ENV: production
 
       - name: Setup Pages
@@ -49,6 +55,8 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # 当 workflow 显式声明 environment + deployment 步骤时，部署输出会作为
+    # GitHub Pages 的官方 "deployment"，从而真正对外发布
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
