@@ -1,5 +1,5 @@
 import Reveal from "./Reveal";
-import { Brain, GitBranch, ShieldCheck, Code2, Sparkles, Repeat } from "lucide-react";
+import { Brain, GitBranch, ShieldCheck, Code2, Sparkles, Repeat, Database, Users } from "lucide-react";
 import { useT } from "@/i18n/useT";
 
 const iconMap = {
@@ -9,6 +9,8 @@ const iconMap = {
   Code2,
   Sparkles,
   Repeat,
+  Database,
+  Users,
 } as const;
 
 export default function Features() {

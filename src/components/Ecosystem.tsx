@@ -19,10 +19,11 @@ const glyphs: Record<string, React.ReactNode> = {
   portal: <GlyphPortal />,
   terrain: <GlyphTerrain />,
   compile: <GlyphCompile />,
+  db: <GlyphDB />,
 };
 
-const codes = ["/NEXUS", "/STORY-LOOM", "/PORTAL", "/TERRAIN", "/COMPILE"];
-const statusKeys: Module["statusKey"][] = ["live", "live", "live", "soon", "soon"];
+const codes = ["/NEXUS", "/STORY-LOOM", "/PORTAL", "/TERRAIN", "/COMPILE", "/NEXUSDB"];
+const statusKeys: Module["statusKey"][] = ["live", "live", "live", "beta", "beta", "live"];
 
 function StatusDot({
   status,
@@ -102,6 +103,27 @@ function GlyphCompile() {
       >
         {"{ }"}
       </text>
+    </svg>
+  );
+}
+function GlyphDB() {
+  return (
+    <svg viewBox="0 0 100 100" className="h-full w-full">
+      <ellipse cx="50" cy="22" rx="30" ry="11" stroke="currentColor" strokeWidth="2" fill="none" />
+      <path
+        d="M20 22 L20 74 C20 80 34 86 50 86 C66 86 80 80 80 74 L80 22"
+        stroke="currentColor"
+        strokeWidth="2"
+        fill="none"
+      />
+      <path
+        d="M20 48 C20 54 34 60 50 60 C66 60 80 54 80 48"
+        stroke="currentColor"
+        strokeWidth="2"
+        fill="none"
+        opacity="0.5"
+      />
+      <circle cx="78" cy="18" r="8" fill="currentColor" opacity="0.15" />
     </svg>
   );
 }
@@ -217,7 +239,20 @@ export default function Ecosystem() {
     description: m.description,
     statusKey: statusKeys[i] ?? "live",
     features: [],
-    glyph: glyphs[i === 0 ? "core" : i === 1 ? "loom" : i === 2 ? "portal" : i === 3 ? "terrain" : "compile"]!,
+    glyph:
+      glyphs[
+        i === 0
+          ? "core"
+          : i === 1
+            ? "loom"
+            : i === 2
+              ? "portal"
+              : i === 3
+                ? "terrain"
+                : i === 4
+                  ? "compile"
+                  : "db"
+      ]!,
   }));
 
   return (

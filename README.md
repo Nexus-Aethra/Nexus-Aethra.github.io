@@ -2,7 +2,7 @@
 
 **Where Worlds Are Forged from Conversation.**
 
-Nexus is an experimental AI-native game platform that redefines how games are created and played. It replaces hardcoded game logic with a dynamic ecosystem where Large Language Models (LLMs) generate terrain, craft branching narratives, and empower Non-Player Characters (NPCs) with runtime code compilation. Every player interaction reshapes the world in real time.
+Nexus is an experimental AI-native game platform that redefines how games are created and played. It replaces hardcoded game logic with a dynamic ecosystem where Large Language Models (LLMs) generate terrain, craft branching narratives, and empower Non-Player Characters (NPCs) with runtime code compilation. Persistence runs on our own storage kernel, **NexusDB**. Every player interaction reshapes the world in real time.
 
 > 🎯 This repository hosts the **Nexus marketing site** (React + Vite + Tailwind), automatically deployed to **GitHub Pages** via GitHub Actions.
 
@@ -21,18 +21,22 @@ Nexus is built as a modular microservices architecture. Each module works togeth
 | Module | Name | Core Responsibility |
 | :--- | :--- | :--- |
 | **Core Platform** | **Nexus** | The central hub that orchestrates all AI and game engine interactions. |
-| **Narrative Engine** | **Story Loom** | Maintains branching story trees (chapters, nodes, quests, triggers) via LLM dialogue analysis, auto-generating new plots from player text. |
-| **Auth Gateway** | **Portal** | Unified security entry point — handles login/registration, issues JWT tokens, and distributes public keys for module-to-module verification. |
-| **Terrain Generator** | *(Coming soon)* | Dynamically builds 3D/2D worlds from natural language descriptions. |
-| **Runtime Compiler** | *(Coming soon)* | Enables NPCs to generate, compile, and execute code on the fly based on player requests. |
+| **Narrative Engine** | **Story Loom** | A visual whiteboard editor — drag chapter and node cards, wire directed edges, anchor the whole story with a unique begin chapter. Characters bind to beats; pixel covers give every world a face. |
+| **Auth Gateway** | **Portal** | Unified security entry point — handles login/registration, issues JWT tokens with automatic refresh, and distributes public keys for module-to-module verification. |
+| **Storage Core** | **NexusDB** | A write-heavy, low-latency single-machine database written in Rust — io_uring, zero-copy IO, a homegrown coroutine scheduler, and multi-protocol access (Redis-compatible today; PG/MySQL/Mongo on the roadmap). |
+| **Character System** | **Story Loom** | Describe people once, bind them to any story beat — protagonists, witnesses, narrators shape how the narrative reacts. |
+| **Terrain Generator** | *(Beta)* | Dynamically builds 3D/2D worlds from natural language descriptions. |
+| **Runtime Compiler** | *(Beta)* | Enables NPCs to generate, compile, and execute code on the fly based on player requests. |
 
 ---
 
 ## ✨ Key Features
 
+- 🗄️ **Self-Built Storage Kernel** — NexusDB, a Rust database written for write-heavy, low-latency worlds: io_uring, zero-copy IO, a homegrown coroutine scheduler and multi-protocol access.
 - 🧠 **LLM-Driven Generation** — Terrain, dialogue, and quests are generated dynamically, not pre-scripted.
-- 🌳 **Dynamic Narrative Trees** — Players expand the story through natural conversations; AI bridges the gap between player intent and game logic.
-- 🛡️ **Secure by Design** — JWT-based authentication with automatic public key rotation across all services.
+- 🌳 **Visual Narrative Editor** — A whiteboard canvas where chapters, nodes and characters are cards you drag, wire with directed edges, and bind together in seconds.
+- 🛡️ **Secure by Design** — JWT-based authentication with automatic refresh and public key rotation; tokens renew invisibly.
+- 👥 **Character System** — Describe people once, bind them to any story beat; roles shape how the narrative reacts.
 - 🔧 **Runtime Compilation** — NPCs can "learn" new abilities by writing and executing code in real time.
 - 🎮 **Infinite Replayability** — No two playthroughs are the same, because the world evolves with every choice.
 - 🌐 **Bilingual UI** — One-click toggle between English and 简体中文 (state persists in `localStorage`).
@@ -132,8 +136,10 @@ This repo is wired with a one-flow deployment:
 ## 🗺️ Roadmap
 
 - [x] Module planning & architecture design
-- [x] Auth Portal (JWT issuance & key distribution)
-- [x] Story Loom (Narrative tree engine)
+- [x] Auth Portal (JWT issuance & auto refresh)
+- [x] Story Loom (whiteboard narrative editor)
+- [x] Character system & node-cast binding
+- [x] NexusDB (self-built storage kernel)
 - [x] Bilingual UI (EN / 中)
 - [x] GitHub Pages deployment via Actions
 - [ ] Terrain Generator integration

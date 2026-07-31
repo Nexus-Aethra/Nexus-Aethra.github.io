@@ -118,30 +118,30 @@ export const dict: Record<Locale, Dict> = {
       menuClose: "Close menu",
     },
     hero: {
-      statusLeft: "system online · build v0.1.0",
+      statusLeft: "system online · build v0.3.0",
       scrollHint: "scroll",
-      badge: "Experimental · AI-native game platform",
+      badge: "Experimental · AI-native game platform · self-built storage core",
       headline1: "Beyond",
       headline2Pre: "the ",
       headline2Accent: "play",
       headline2Post: ".",
-      body: "Where worlds are forged from conversation. Nexus replaces hardcoded game logic with a living ecosystem: large language models generate terrain, weave branching narratives, and grant NPCs the ability to compile code at runtime — every player choice reshapes the world in real time.",
+      body: "Where worlds are forged from conversation. Nexus replaces hardcoded game logic with a living ecosystem: a self-built storage kernel (NexusDB) grounds every world, visual editors weave branching narratives, characters come alive, and NPCs gain the ability to compile code at runtime — every player choice reshapes the world in real time.",
       ctaPrimary: "Explore the Ecosystem",
       ctaSecondary: "Read the Vision",
       marquee: [
         "AI-Native Worlds",
         "●",
+        "NexusDB Storage Core",
+        "●",
+        "Visual Story Editor",
+        "●",
         "Branching Narratives",
+        "●",
+        "Character System",
         "●",
         "Runtime Compilation",
         "●",
         "Infinite Replayability",
-        "●",
-        "Multiplayer Realms",
-        "●",
-        "LLM-Driven NPCs",
-        "●",
-        "Procedural Everything",
         "●",
       ],
     },
@@ -170,12 +170,12 @@ export const dict: Record<Locale, Dict> = {
     },
     ecosystem: {
       tag: "The Ecosystem",
-      count: "5 modules · 1 vision",
+      count: "6 modules · 1 vision",
       titleLead: "A mosaic of microservices, ",
       titleAccent: "orchestrated",
       titleTail: " by AI.",
-      body: "Each Nexus module is an independent service. Together they form a single living organism: identity, story, world, and mind — stitched at runtime by language models.",
-      coreChain: "core · narrative · auth · terrain · compile",
+      body: "Each Nexus module is an independent service. Together they form a single living organism: identity, story, world, mind and storage — stitched at runtime by language models on top of our self-built NexusDB kernel.",
+      coreChain: "core · narrative · auth · terrain · compile · storage",
       modules: [
         {
           code: "/NEXUS",
@@ -197,11 +197,11 @@ export const dict: Record<Locale, Dict> = {
           name: "Story Loom",
           role: "Narrative Engine",
           description:
-            "Maintains branching story trees — chapters, nodes, quests, triggers — via LLM dialogue analysis. New plots auto-weave from player text.",
+            "Visual whiteboard editor: drag chapter and node cards, wire directed edges between them, and let a unique begin chapter anchor the whole story. Characters bind to beats; pixel covers give every world a face.",
           status: { live: "Live", beta: "Beta", soon: "Soon" },
           features: [
-            ["Branch tree", "Quest synthesis", "Trigger graph"],
-            [],
+            ["Whiteboard editor", "Directed edges", "Begin chapter"],
+            ["Character system", "Pixel covers", "Bridge nodes"],
             [],
             [],
             [],
@@ -224,7 +224,7 @@ export const dict: Record<Locale, Dict> = {
         },
         {
           code: "/TERRAIN",
-          name: "—",
+          name: "Terrain",
           role: "Terrain Generator",
           description:
             "Dynamically builds 3D / 2D worlds from natural language descriptions. Mountains first, then forests, then ruins, then weather.",
@@ -239,7 +239,7 @@ export const dict: Record<Locale, Dict> = {
         },
         {
           code: "/COMPILE",
-          name: "—",
+          name: "Compile",
           role: "Runtime Compiler",
           description:
             "Lets NPCs generate, compile and execute code on the fly — new abilities, new spells, new crafts — every player conversation a chance to evolve.",
@@ -252,14 +252,34 @@ export const dict: Record<Locale, Dict> = {
             [],
           ],
         },
+        {
+          code: "/NEXUSDB",
+          name: "NexusDB",
+          role: "Self-Built Storage Core",
+          description:
+            "A write-heavy, low-latency single-machine database written in Rust — Share-Nothing cores, io_uring, a homegrown coroutine scheduler, and unified multi-protocol access (Redis-compatible today, PG/MySQL/Mongo on the roadmap). Every world's persistence runs on our own kernel.",
+          status: { live: "Live", beta: "Beta", soon: "Soon" },
+          features: [
+            ["io_uring", "Zero-copy", "Coroutine scheduler"],
+            ["Five protocols", "SQL + indexes", "GC compact"],
+            [],
+            [],
+            [],
+          ],
+        },
       ],
     },
     features: {
       tag: "Key Features",
-      titleLead: "Six things ",
+      titleLead: "Eight things ",
       titleItalic: "every other engine",
       titleTail: " can't do.",
       items: [
+        {
+          icon: "Database",
+          title: "Self-Built Storage Kernel",
+          body: "NexusDB — a Rust database written for write-heavy, low-latency worlds: io_uring, zero-copy IO, a homegrown coroutine scheduler and multi-protocol access.",
+        },
         {
           icon: "Brain",
           title: "LLM-Driven Generation",
@@ -267,13 +287,13 @@ export const dict: Record<Locale, Dict> = {
         },
         {
           icon: "GitBranch",
-          title: "Dynamic Narrative Trees",
-          body: "Players expand the story through natural conversations. AI bridges the gap between player intent and game logic.",
+          title: "Visual Narrative Editor",
+          body: "A whiteboard canvas where chapters, nodes and characters are cards you drag, wire with directed edges, and bind together in seconds.",
         },
         {
           icon: "ShieldCheck",
           title: "Secure by Design",
-          body: "JWT-based authentication with automatic public-key rotation. Every microservice trusts every other.",
+          body: "JWT-based authentication with automatic refresh and public-key rotation. Tokens renew invisibly — sessions never die mid-game.",
         },
         {
           icon: "Code2",
@@ -284,6 +304,11 @@ export const dict: Record<Locale, Dict> = {
           icon: "Repeat",
           title: "Infinite Replayability",
           body: "No two playthroughs are the same. The world evolves with every choice; endings branch into new beginnings.",
+        },
+        {
+          icon: "Users",
+          title: "Character System",
+          body: "Describe people once, bind them to any story beat. Protagonists, witnesses, narrators — roles shape how the narrative reacts.",
         },
         {
           icon: "Sparkles",
@@ -316,8 +341,10 @@ export const dict: Record<Locale, Dict> = {
       },
       items: [
         { label: "Module planning & architecture design", date: "Q1" },
-        { label: "Auth Portal — JWT issuance & key distribution", date: "Q2" },
-        { label: "Story Loom — narrative tree engine", date: "Q3" },
+        { label: "Auth Portal — JWT issuance & auto refresh", date: "Q2" },
+        { label: "Story Loom — whiteboard narrative editor", date: "Q3" },
+        { label: "Character system & node-cast binding", date: "Q4" },
+        { label: "NexusDB — self-built storage kernel", date: "Q4" },
         { label: "Terrain Generator integration", date: "Q4" },
         { label: "Runtime Compilation Layer", date: "Q1" },
         { label: "First public playable demo", date: "Q2" },
@@ -352,7 +379,7 @@ export const dict: Record<Locale, Dict> = {
         },
         {
           title: "Modules",
-          links: ["Nexus Core", "Story Loom", "Auth Portal", "Terrain · Compile"],
+          links: ["Nexus Core", "Story Loom", "Auth Portal", "NexusDB", "Terrain · Compile"],
         },
         {
           title: "Community",
@@ -387,30 +414,30 @@ export const dict: Record<Locale, Dict> = {
       menuClose: "关闭菜单",
     },
     hero: {
-      statusLeft: "系统在线 · 版本 v0.1.0",
+      statusLeft: "系统在线 · 版本 v0.3.0",
       scrollHint: "滚动",
-      badge: "实验性 · AI 原生游戏平台",
+      badge: "实验性 · AI 原生游戏平台 · 自研存储内核",
       headline1: "Beyond",
       headline2Pre: "the ",
       headline2Accent: "play",
       headline2Post: ".",
-      body: "用对话锻造世界。Nexus 用一套活的生态系统取代硬编码的游戏逻辑：大语言模型实时生成地形、编织分支叙事、赋予 NPC 运行时编译代码的能力 —— 玩家的每一个选择都在重塑这个世界。",
+      body: "用对话锻造世界。Nexus 用一套活的生态系统取代硬编码的游戏逻辑：自研存储内核 NexusDB 承载每个世界的持久化，可视化编辑器编织分支叙事、人物系统让人物活起来，大语言模型实时生成地形、赋予 NPC 运行时编译代码的能力 —— 玩家的每一个选择都在重塑这个世界。",
       ctaPrimary: "探索生态",
       ctaSecondary: "阅读理念",
       marquee: [
         "AI 原生世界",
         "●",
+        "NexusDB 存储内核",
+        "●",
+        "可视化剧情编辑器",
+        "●",
         "分支叙事",
+        "●",
+        "人物系统",
         "●",
         "运行时编译",
         "●",
         "无限可重玩性",
-        "●",
-        "多人在线",
-        "●",
-        "LLM 驱动 NPC",
-        "●",
-        "完全程序化",
         "●",
       ],
     },
@@ -438,12 +465,12 @@ export const dict: Record<Locale, Dict> = {
     },
     ecosystem: {
       tag: "生态",
-      count: "5 个模块 · 1 个愿景",
+      count: "6 个模块 · 1 个愿景",
       titleLead: "微服务拼成的马赛克,由",
       titleAccent: "AI",
       titleTail: "统一调度。",
-      body: "每一个 Nexus 模块都是独立服务。它们共同构成一个有机体:身份、叙事、世界与心智 —— 在运行时由语言模型缝合在一起。",
-      coreChain: "核心 · 叙事 · 鉴权 · 地形 · 编译",
+      body: "每一个 Nexus 模块都是独立服务。它们共同构成一个有机体:身份、叙事、世界、心智与存储 —— 在运行时由语言模型缝合,并由自研 NexusDB 内核承载持久化。",
+      coreChain: "核心 · 叙事 · 鉴权 · 地形 · 编译 · 存储",
       modules: [
         {
           code: "/NEXUS",
@@ -465,11 +492,11 @@ export const dict: Record<Locale, Dict> = {
           name: "Story Loom",
           role: "叙事引擎",
           description:
-            "通过 LLM 对话分析维护分支故事树 —— 章节、节点、任务、触发器。新情节由玩家文字自动织出。",
+            "可视化白板编辑器:拖拽章节与节点卡片、用有向边连接它们,由一个唯一的 begin 章节锚定整个故事。人物绑定剧情节点,像素封面为每个世界赋予面孔。",
           status: { live: "已上线", beta: "Beta", soon: "即将推出" },
           features: [
-            ["分支树", "任务合成", "触发器图"],
-            [],
+            ["白板编辑器", "有向边", "begin 章节"],
+            ["人物系统", "像素封面", "桥节点"],
             [],
             [],
             [],
@@ -492,7 +519,7 @@ export const dict: Record<Locale, Dict> = {
         },
         {
           code: "/TERRAIN",
-          name: "—",
+          name: "Terrain",
           role: "地形生成器",
           description:
             "从自然语言描述动态构建 3D / 2D 世界。先是山,接着是森林,然后是遗迹,然后是天气。",
@@ -507,7 +534,7 @@ export const dict: Record<Locale, Dict> = {
         },
         {
           code: "/COMPILE",
-          name: "—",
+          name: "Compile",
           role: "运行时编译器",
           description:
             "让 NPC 即时生成、编译并执行代码 —— 新技能、新法术、新工艺 —— 每一场玩家对话都是一次进化的机会。",
@@ -520,14 +547,34 @@ export const dict: Record<Locale, Dict> = {
             [],
           ],
         },
+        {
+          code: "/NEXUSDB",
+          name: "NexusDB",
+          role: "自研存储内核",
+          description:
+            "用 Rust 为写密集、低延迟的单一机器场景编写的数据库 —— Share-Nothing 核心、io_uring、自研协程调度器,以及统一的多协议访问(当前兼容 Redis,PG/MySQL/Mongo 在路线图上)。每一个世界的持久化都跑在我们自己的内核上。",
+          status: { live: "已上线", beta: "Beta", soon: "即将推出" },
+          features: [
+            ["io_uring", "零拷贝", "协程调度器"],
+            ["五协议", "SQL + 索引", "GC 压缩"],
+            [],
+            [],
+            [],
+          ],
+        },
       ],
     },
     features: {
       tag: "核心特性",
-      titleLead: "六件",
+      titleLead: "八件",
       titleItalic: "其他引擎",
       titleTail: "做不到的事。",
       items: [
+        {
+          icon: "Database",
+          title: "自研存储内核",
+          body: "NexusDB —— 面向写密集、低延迟游戏世界打造的 Rust 数据库:io_uring、零拷贝 IO、自研协程调度器与多协议访问。",
+        },
         {
           icon: "Brain",
           title: "LLM 驱动生成",
@@ -535,13 +582,13 @@ export const dict: Record<Locale, Dict> = {
         },
         {
           icon: "GitBranch",
-          title: "动态叙事树",
-          body: "玩家通过自然对话拓展剧情。AI 弥合「玩家意图」与「游戏逻辑」之间的鸿沟。",
+          title: "可视化叙事编辑器",
+          body: "一块白板画布:章节、节点、人物都是可拖拽的卡片,用有向边连线、互相绑定,几秒内完成叙事编织。",
         },
         {
           icon: "ShieldCheck",
           title: "原生安全设计",
-          body: "基于 JWT 的鉴权 + 自动公钥轮换。每个微服务都彼此互信。",
+          body: "基于 JWT 的鉴权 + 自动刷新与公钥轮换。令牌静默续期 —— 会话永不中途失效。",
         },
         {
           icon: "Code2",
@@ -552,6 +599,11 @@ export const dict: Record<Locale, Dict> = {
           icon: "Repeat",
           title: "无限可重玩性",
           body: "没有两次通关是一样的。世界随每个选择演进;结局会衍生出新的开始。",
+        },
+        {
+          icon: "Users",
+          title: "人物系统",
+          body: "一次描述人物,随时绑定到任何剧情节点。主角、目击者、旁白 —— 角色决定了叙事如何回应。",
         },
         {
           icon: "Sparkles",
@@ -584,8 +636,10 @@ export const dict: Record<Locale, Dict> = {
       },
       items: [
         { label: "模块规划与架构设计", date: "Q1" },
-        { label: "鉴权 Portal —— JWT 签发与密钥分发", date: "Q2" },
-        { label: "Story Loom —— 分支叙事树引擎", date: "Q3" },
+        { label: "鉴权 Portal —— JWT 签发与自动刷新", date: "Q2" },
+        { label: "Story Loom —— 白板叙事编辑器", date: "Q3" },
+        { label: "人物系统与节点角色绑定", date: "Q4" },
+        { label: "NexusDB —— 自研存储内核", date: "Q4" },
         { label: "地形生成器集成", date: "Q4" },
         { label: "运行时编译层", date: "Q1" },
         { label: "首个公测可玩 Demo", date: "Q2" },
@@ -614,7 +668,7 @@ export const dict: Record<Locale, Dict> = {
       blurb: "实验性 AI 原生游戏平台,用对话锻造世界。",
       columns: [
         { title: "项目", links: ["理念", "生态", "路线图", "宣言"] },
-        { title: "模块", links: ["Nexus 核心", "Story Loom", "Auth Portal", "地形 · 编译"] },
+        { title: "模块", links: ["Nexus 核心", "Story Loom", "Auth Portal", "NexusDB", "地形 · 编译"] },
         { title: "社区", links: ["GitHub", "Discord", "贡献指南", "联系我们"] },
       ],
       builtBy: "Nexus 团队用 ♥ 构建",
